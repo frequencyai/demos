@@ -71,6 +71,16 @@ export const BuildPipeline: React.FC = () => {
     easing: Easing.out(Easing.quad),
   });
 
+  // Continuous fill for each stage (smooth bar progression)
+  const getStageFill = (stageIndex: number): number => {
+    return APPS.reduce((sum, _, ai) => {
+      const progress = getAppStageProgress(ai);
+      if (progress >= stageIndex + 1) return sum + 1;
+      if (progress >= stageIndex) return sum + (progress - stageIndex);
+      return sum;
+    }, 0);
+  };
+
   // Visible stages (condensed)
   const visibleStages = [
     { key: "selected", index: 0 },
@@ -124,17 +134,17 @@ export const BuildPipeline: React.FC = () => {
           {/* Full pipeline bar */}
           <div style={{ display: "flex", gap: 2 }}>
             {BUILD_STAGES.map((stage, i) => {
-              const appsInStage = APPS.filter((_, ai) => getAppStage(ai) === i).length;
-              const appsPassedStage = APPS.filter((_, ai) => getAppStage(ai) > i).length;
+              const stageFill = getStageFill(i);
               const isTerminal = i === BUILD_STAGES.length - 1;
-              const isActive = appsInStage > 0;
+              const displayCount = Math.round(stageFill);
+              const fillFraction = stageFill / APPS.length;
 
               return (
                 <div key={stage} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
-                  <span style={{ fontFamily: fonts.mono, fontSize: 24, fontWeight: 700, fontVariantNumeric: "tabular-nums", color: isActive ? (isTerminal ? colors.positive : colors.accent) : colors.text }}>{appsInStage}</span>
+                  <span style={{ fontFamily: fonts.mono, fontSize: 24, fontWeight: 700, fontVariantNumeric: "tabular-nums", color: fillFraction > 0.01 ? (isTerminal ? colors.positive : colors.accent) : colors.text }}>{displayCount}</span>
                   <div style={{ width: "100%", height: 6, backgroundColor: colors.borderLight, borderRadius: 2, overflow: "hidden", position: "relative" }}>
-                    <div style={{ height: "100%", width: `${((appsPassedStage + appsInStage * 0.5) / APPS.length) * 100}%`, backgroundColor: isTerminal ? colors.positive : colors.accent, borderRadius: 2 }} />
-                    {isActive && !isTerminal && (
+                    <div style={{ height: "100%", width: `${fillFraction * 100}%`, backgroundColor: isTerminal ? colors.positive : colors.accent, borderRadius: 2 }} />
+                    {fillFraction > 0.01 && fillFraction < 0.99 && !isTerminal && (
                       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)", transform: `translateX(${(frame * 3) % 200 - 100}%)`, opacity: 0.4 }} />
                     )}
                   </div>

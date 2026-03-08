@@ -25,13 +25,17 @@ export const DeployChecklist: React.FC = () => {
     durationInFrames: Math.round(0.6 * fps),
   });
 
-  // Progress ring
+  // Progress ring — discrete count for text, smooth for ring
   const completedCount = DEPLOY_CHECKLIST.filter((_, i) => {
     const checkFrame = 0.5 * fps + i * 0.45 * fps;
     return frame >= checkFrame;
   }).length;
-  const ringProgress = completedCount / DEPLOY_CHECKLIST.length;
-  const ringCircumference = 2 * Math.PI * 48;
+  const smoothRingProgress = interpolate(
+    frame,
+    [0.5 * fps, 0.5 * fps + DEPLOY_CHECKLIST.length * 0.45 * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.quad) }
+  );
 
   // Overall completion flash
   const allDone = completedCount === DEPLOY_CHECKLIST.length;
@@ -94,7 +98,7 @@ export const DeployChecklist: React.FC = () => {
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeDasharray={2 * Math.PI * 60}
-                strokeDashoffset={2 * Math.PI * 60 * (1 - ringProgress)}
+                strokeDashoffset={2 * Math.PI * 60 * (1 - smoothRingProgress)}
               />
             </svg>
             <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>

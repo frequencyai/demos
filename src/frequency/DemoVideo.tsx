@@ -4,6 +4,7 @@ import { z } from "zod";
 import { TransitionSeries, springTiming } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
 import { slide } from "@remotion/transitions/slide";
+import { wipe } from "@remotion/transitions/wipe";
 
 import { HeroIntro } from "./scenes/HeroIntro";
 import { SelectRepo } from "./scenes/SelectRepo";
@@ -64,8 +65,8 @@ export const DemoVideo: React.FC<z.infer<typeof DemoVideoSchema>> = () => {
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
-        presentation={slide({ direction: "from-right" })}
-        timing={smoothFade(0.6)}
+        presentation={wipe({ direction: "from-right" })}
+        timing={smoothFade(0.9)}
       />
 
       {/* Scene 5: Ideas pipeline — +1.5s hold to see validated cards */}
@@ -74,8 +75,8 @@ export const DemoVideo: React.FC<z.infer<typeof DemoVideoSchema>> = () => {
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
-        presentation={slide({ direction: "from-right" })}
-        timing={smoothFade(0.6)}
+        presentation={slide({ direction: "from-bottom" })}
+        timing={smoothFade(0.9)}
       />
 
       {/* Scene 6: Build pipeline — +2s hold to see promoted */}
