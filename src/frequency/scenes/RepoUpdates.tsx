@@ -69,18 +69,18 @@ export const RepoUpdates: React.FC = () => {
     >
       <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)", pointerEvents: "none", zIndex: 10 }} />
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 20, width: 840 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 24, width: 1200 }}>
         {/* Header */}
         <div style={{ opacity: headerSpring, transform: `translateY(${interpolate(headerSpring, [0, 1], [15, 0])}px)` }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 8 }}>
             <svg width="28" height="28" viewBox="0 0 16 16" fill={colors.accent}>
               <path d="M15.698 7.287L8.712.302a1.03 1.03 0 00-1.457 0l-1.45 1.45 1.84 1.84a1.223 1.223 0 011.55 1.56l1.773 1.774a1.224 1.224 0 11-.733.69L8.56 5.94v4.286a1.224 1.224 0 11-1.006-.014V5.871a1.224 1.224 0 01-.664-1.605L5.08 2.456.302 7.234a1.03 1.03 0 000 1.457l6.986 6.986a1.03 1.03 0 001.457 0l6.953-6.953a1.03 1.03 0 000-1.457z" />
             </svg>
-            <h2 style={{ fontFamily: fonts.body, fontSize: 30, fontWeight: 800, color: colors.text, letterSpacing: "-0.03em", margin: 0 }}>app-factory</h2>
+            <h2 style={{ fontFamily: fonts.body, fontSize: 36, fontWeight: 800, color: colors.text, letterSpacing: "-0.03em", margin: 0 }}>app-factory</h2>
           </div>
 
           {/* Git stats bar */}
-          <div style={{ display: "flex", alignItems: "center", gap: 20, fontFamily: fonts.mono, fontSize: 14 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 24, fontFamily: fonts.mono, fontSize: 16 }}>
             <span style={{ color: colors.positive }}>+{filesAdded} added</span>
             <span style={{ color: colors.warning }}>~1 modified</span>
             <span style={{ color: colors.textTertiary }}>3 apps promoted</span>
@@ -125,7 +125,7 @@ export const RepoUpdates: React.FC = () => {
                   display: "flex",
                   alignItems: "center",
                   gap: 8,
-                  padding: "7px 18px",
+                  padding: "9px 22px",
                   borderBottom: i < FILE_TREE.length - 1 ? `1px solid ${colors.borderLight}` : "none",
                   opacity: rowSpring,
                   transform: `translateX(${interpolate(rowSpring, [0, 1], [-12, 0])}px)`,
@@ -147,7 +147,7 @@ export const RepoUpdates: React.FC = () => {
 
                 <span style={{
                   fontFamily: fonts.mono,
-                  fontSize: 14,
+                  fontSize: 16,
                   color: isNew ? colors.positive : isModified ? colors.warning : colors.textMuted,
                   whiteSpace: "pre",
                   flex: 1,
@@ -156,10 +156,10 @@ export const RepoUpdates: React.FC = () => {
                 </span>
 
                 {isNew && (
-                  <span style={{ fontFamily: fonts.mono, fontSize: 11, color: colors.positive, textTransform: "uppercase" as const, letterSpacing: "0.1em", opacity: 0.8 }}>new</span>
+                  <span style={{ fontFamily: fonts.mono, fontSize: 13, color: colors.positive, textTransform: "uppercase" as const, letterSpacing: "0.1em", opacity: 0.8 }}>new</span>
                 )}
                 {isModified && (
-                  <span style={{ fontFamily: fonts.mono, fontSize: 11, color: colors.warning, textTransform: "uppercase" as const, letterSpacing: "0.1em", opacity: 0.8 }}>mod</span>
+                  <span style={{ fontFamily: fonts.mono, fontSize: 13, color: colors.warning, textTransform: "uppercase" as const, letterSpacing: "0.1em", opacity: 0.8 }}>mod</span>
                 )}
               </div>
             );

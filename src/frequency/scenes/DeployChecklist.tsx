@@ -71,7 +71,7 @@ export const DeployChecklist: React.FC = () => {
         />
       )}
 
-      <div style={{ display: "flex", gap: 64, alignItems: "flex-start", width: 1100 }}>
+      <div style={{ display: "flex", gap: 72, alignItems: "flex-start", width: 1400 }}>
         {/* Left: progress ring + info */}
         <div
           style={{
@@ -113,7 +113,7 @@ export const DeployChecklist: React.FC = () => {
         </div>
 
         {/* Right: checklist */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 14, flex: 1 }}>
           {DEPLOY_CHECKLIST.map((item, i) => {
             const checkFrame = 0.5 * fps + i * 0.45 * fps;
 
@@ -150,7 +150,7 @@ export const DeployChecklist: React.FC = () => {
                   display: "flex",
                   alignItems: "center",
                   gap: 14,
-                  padding: "10px 14px",
+                  padding: "14px 18px",
                   border: `1px solid ${checked ? "rgba(48, 209, 88, 0.15)" : colors.border}`,
                   borderRadius: 7,
                   backgroundColor: checked ? "rgba(48, 209, 88, 0.03)" : colors.surface,
@@ -161,7 +161,7 @@ export const DeployChecklist: React.FC = () => {
                 {/* Checkbox */}
                 <div
                   style={{
-                    width: 22, height: 22, borderRadius: 5,
+                    width: 26, height: 26, borderRadius: 6,
                     border: `2px solid ${checked ? colors.positive : colors.border}`,
                     backgroundColor: checked ? `rgba(48, 209, 88, ${0.12 * checkSpring})` : "transparent",
                     display: "flex", alignItems: "center", justifyContent: "center",

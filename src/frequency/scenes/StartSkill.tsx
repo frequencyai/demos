@@ -124,7 +124,7 @@ export const StartSkill: React.FC = () => {
           display: "flex",
           flexDirection: "column",
           gap: 24,
-          width: 760,
+          width: 1000,
           opacity: cardSpring,
           transform: `scale(${interpolate(cardSpring, [0, 1], [0.94, 1])}) translateY(${interpolate(cardSpring, [0, 1], [20, 0])}px)`,
         }}
@@ -135,7 +135,7 @@ export const StartSkill: React.FC = () => {
             border: `1px solid ${clicked ? colors.accent : colors.border}`,
             borderRadius: 12,
             backgroundColor: colors.surface,
-            padding: "28px 32px",
+            padding: "36px 40px",
             display: "flex",
             flexDirection: "column",
             gap: 20,
@@ -174,7 +174,7 @@ export const StartSkill: React.FC = () => {
               <h2
                 style={{
                   fontFamily: fonts.body,
-                  fontSize: 22,
+                  fontSize: 28,
                   fontWeight: 700,
                   color: colors.text,
                   margin: 0,
@@ -186,9 +186,9 @@ export const StartSkill: React.FC = () => {
               <p
                 style={{
                   fontFamily: fonts.mono,
-                  fontSize: 12,
+                  fontSize: 14,
                   color: colors.textTertiary,
-                  marginTop: 2,
+                  marginTop: 3,
                 }}
               >
                 Autonomous workflow automation skill
@@ -198,10 +198,10 @@ export const StartSkill: React.FC = () => {
             {/* Start / Running button */}
             <div
               style={{
-                padding: "8px 24px",
+                padding: "10px 28px",
                 borderRadius: 6,
                 fontFamily: fonts.mono,
-                fontSize: 12,
+                fontSize: 14,
                 fontWeight: 600,
                 textTransform: "uppercase" as const,
                 letterSpacing: "0.08em",
@@ -237,7 +237,7 @@ export const StartSkill: React.FC = () => {
             <span
               style={{
                 fontFamily: fonts.mono,
-                fontSize: 10,
+                fontSize: 12,
                 color: colors.textTertiary,
                 textTransform: "uppercase" as const,
                 letterSpacing: "0.12em",
@@ -248,7 +248,7 @@ export const StartSkill: React.FC = () => {
             <span
               style={{
                 fontFamily: fonts.mono,
-                fontSize: 13,
+                fontSize: 15,
                 color: colors.text,
                 fontWeight: 500,
               }}
@@ -259,7 +259,7 @@ export const StartSkill: React.FC = () => {
               style={{
                 marginLeft: "auto",
                 fontFamily: fonts.mono,
-                fontSize: 10,
+                fontSize: 12,
                 color: colors.textTertiary,
               }}
             >
@@ -298,16 +298,16 @@ export const StartSkill: React.FC = () => {
               border: `1px solid ${colors.border}`,
               borderRadius: 10,
               backgroundColor: colors.surface,
-              padding: "20px 24px",
+              padding: "24px 28px",
               opacity: terminalSpring,
               transform: `translateY(${interpolate(terminalSpring, [0, 1], [10, 0])}px)`,
-              minHeight: 240,
+              minHeight: 280,
             }}
           >
             <div
               style={{
                 fontFamily: fonts.mono,
-                fontSize: 9,
+                fontSize: 11,
                 color: colors.textTertiary,
                 textTransform: "uppercase" as const,
                 letterSpacing: "0.15em",
@@ -326,7 +326,7 @@ export const StartSkill: React.FC = () => {
                     key={i}
                     style={{
                       fontFamily: fonts.mono,
-                      fontSize: 13,
+                      fontSize: 15,
                       lineHeight: 1.8,
                       color: line.text.includes("✓")
                         ? colors.positive
@@ -370,7 +370,7 @@ export const StartSkill: React.FC = () => {
                 <span
                   style={{
                     fontFamily: fonts.mono,
-                    fontSize: 11,
+                    fontSize: 13,
                     color: colors.positive,
                   }}
                 >

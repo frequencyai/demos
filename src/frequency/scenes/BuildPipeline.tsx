@@ -80,29 +80,29 @@ export const BuildPipeline: React.FC = () => {
   ];
 
   return (
-    <AbsoluteFill style={{ backgroundColor: colors.bg, overflow: "hidden" }}>
+    <AbsoluteFill style={{ backgroundColor: colors.bg, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)", pointerEvents: "none", zIndex: 40 }} />
 
-      <div style={{ width: "100%", height: "100%", display: "flex" }}>
+      <div style={{ width: 1760, height: 840, display: "flex", borderRadius: 14, border: `1px solid ${colors.border}`, overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.3)" }}>
         {/* Sidebar */}
-        <div style={{ width: 320, height: "100%", backgroundColor: colors.surface, borderRight: `1px solid ${colors.border}`, display: "flex", flexDirection: "column", padding: "20px 0" }}>
-          <div style={{ padding: "0 20px 12px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <svg width={24} height={24} viewBox="0 0 32 32" fill="none"><path d={LOGO_WAVE_PATH} stroke={colors.accent} strokeWidth="2.5" fill="none" strokeLinecap="round" /></svg>
-              <span style={{ fontFamily: fonts.body, fontSize: 17, fontWeight: 700, letterSpacing: "0.08em", color: colors.text }}>FREQUENCY</span>
+        <div style={{ width: 380, backgroundColor: colors.surface, borderRight: `1px solid ${colors.border}`, display: "flex", flexDirection: "column", padding: "24px 0" }}>
+          <div style={{ padding: "0 24px 14px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <svg width={32} height={32} viewBox="0 0 32 32" fill="none"><path d={LOGO_WAVE_PATH} stroke={colors.accent} strokeWidth="2.5" fill="none" strokeLinecap="round" /></svg>
+              <span style={{ fontFamily: fonts.body, fontSize: 19, fontWeight: 700, letterSpacing: "0.08em", color: colors.text }}>FREQUENCY</span>
             </div>
-            <div style={{ marginTop: 8, fontFamily: fonts.mono, fontSize: 10, color: colors.textTertiary, padding: "5px 8px", border: `1px solid ${colors.accent}`, borderRadius: 3, backgroundColor: colors.bg }}>app-factory</div>
+            <div style={{ marginTop: 10, fontFamily: fonts.mono, fontSize: 13, color: colors.textTertiary, padding: "7px 10px", border: `1px solid ${colors.accent}`, borderRadius: 3, backgroundColor: colors.bg }}>app-factory</div>
           </div>
           {["ideas", "build", "deploy", "release-shared", "release", "marketing", "bugjar"].map((name) => {
             const isBuild = name === "build";
             const isIdeas = name === "ideas";
             return (
-              <div key={name} style={{ display: "flex", flexDirection: "column", gap: 3, padding: "10px 20px", borderLeft: isBuild ? `2px solid ${colors.accent}` : "2px solid transparent", backgroundColor: isBuild ? colors.surfaceHover : "transparent" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: colors.positive, boxShadow: `0 0 6px ${colors.positive}` }} />
-                  <span style={{ fontFamily: fonts.body, fontSize: 14, color: isBuild ? colors.text : colors.textMuted, fontWeight: isBuild ? 500 : 400 }}>{name}</span>
-                  {isBuild && <span style={{ marginLeft: "auto", fontFamily: fonts.mono, fontSize: 9, color: colors.accent }}>{APPS.filter((_, i) => getAppStage(i) >= BUILD_STAGES.length - 1).length}/{APPS.length}</span>}
-                  {isIdeas && <span style={{ marginLeft: "auto", fontFamily: fonts.mono, fontSize: 9, color: colors.positive }}>3/3 ✓</span>}
+              <div key={name} style={{ display: "flex", flexDirection: "column", gap: 3, padding: "11px 24px", borderLeft: isBuild ? `2px solid ${colors.accent}` : "2px solid transparent", backgroundColor: isBuild ? colors.surfaceHover : "transparent" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ width: 7, height: 7, borderRadius: "50%", backgroundColor: colors.positive, boxShadow: `0 0 6px ${colors.positive}` }} />
+                  <span style={{ fontFamily: fonts.body, fontSize: 16, color: isBuild ? colors.text : colors.textMuted, fontWeight: isBuild ? 500 : 400 }}>{name}</span>
+                  {isBuild && <span style={{ marginLeft: "auto", fontFamily: fonts.mono, fontSize: 11, color: colors.accent }}>{APPS.filter((_, i) => getAppStage(i) >= BUILD_STAGES.length - 1).length}/{APPS.length}</span>}
+                  {isIdeas && <span style={{ marginLeft: "auto", fontFamily: fonts.mono, fontSize: 11, color: colors.positive }}>3/3 ✓</span>}
                 </div>
                 {isBuild && (
                   <div style={{ height: 2, backgroundColor: colors.borderLight, borderRadius: 1, overflow: "hidden" }}>
@@ -115,10 +115,10 @@ export const BuildPipeline: React.FC = () => {
         </div>
 
         {/* Main content */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "16px 32px", gap: 16 }}>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "24px 40px", gap: 16 }}>
           <div>
-            <h2 style={{ fontFamily: fonts.body, fontSize: 26, fontWeight: 800, color: colors.text, letterSpacing: "-0.03em", margin: 0 }}>build</h2>
-            <p style={{ fontFamily: fonts.mono, fontSize: 11, color: colors.accent, marginTop: 3 }}>implement, review, build & promote</p>
+            <h2 style={{ fontFamily: fonts.body, fontSize: 30, fontWeight: 800, color: colors.text, letterSpacing: "-0.03em", margin: 0 }}>build</h2>
+            <p style={{ fontFamily: fonts.mono, fontSize: 13, color: colors.accent, marginTop: 3 }}>implement, review, build & promote</p>
           </div>
 
           {/* Full pipeline bar */}

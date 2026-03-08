@@ -65,12 +65,15 @@ export const SelectRepo: React.FC = () => {
         )
       : 0;
 
-  const repos = ["app-factory", "frontend-research", "factory"];
+  const repos = ["app-factory", "content creation", "growth marketing"];
 
   return (
     <AbsoluteFill
       style={{
         backgroundColor: colors.bg,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         overflow: "hidden",
       }}
     >
@@ -89,9 +92,13 @@ export const SelectRepo: React.FC = () => {
       {/* Dashboard container with boot animation */}
       <div
         style={{
-          width: "100%",
-          height: "100%",
+          width: 1760,
+          height: 840,
           display: "flex",
+          borderRadius: 14,
+          border: `1px solid ${colors.border}`,
+          overflow: "hidden",
+          boxShadow: "0 16px 48px rgba(0,0,0,0.3)",
           opacity: bootOpacity,
           transform: `scale(${bootScale})`,
           transformOrigin: "center center",
@@ -100,14 +107,13 @@ export const SelectRepo: React.FC = () => {
         {/* Sidebar */}
         <div
           style={{
-            width: 320,
-            height: "100%",
+            width: 380,
             backgroundColor: colors.surface,
             borderRight: `1px solid ${colors.border}`,
             display: "flex",
             flexDirection: "column",
-            padding: 20,
-            gap: 12,
+            padding: 24,
+            gap: 14,
             position: "relative",
             zIndex: 10,
           }}
@@ -120,7 +126,7 @@ export const SelectRepo: React.FC = () => {
               gap: 10,
             }}
           >
-            <svg width={28} height={28} viewBox="0 0 32 32" fill="none">
+            <svg width={32} height={32} viewBox="0 0 32 32" fill="none">
               <path
                 d={LOGO_WAVE_PATH}
                 stroke={colors.accent}
@@ -132,7 +138,7 @@ export const SelectRepo: React.FC = () => {
             <span
               style={{
                 fontFamily: fonts.body,
-                fontSize: 15,
+                fontSize: 18,
                 fontWeight: 700,
                 letterSpacing: "0.08em",
                 color: colors.text,
@@ -154,11 +160,11 @@ export const SelectRepo: React.FC = () => {
           {/* Repo selector */}
           <div
             style={{
-              padding: "7px 10px",
+              padding: "9px 12px",
               border: `1px solid ${selected ? colors.accent : colors.border}`,
               borderRadius: 4,
               fontFamily: fonts.mono,
-              fontSize: 11,
+              fontSize: 13,
               color: selected ? colors.text : colors.textMuted,
               backgroundColor: colors.bg,
               position: "relative",
@@ -203,9 +209,9 @@ export const SelectRepo: React.FC = () => {
                 <div
                   key={repo}
                   style={{
-                    padding: "9px 12px",
+                    padding: "10px 14px",
                     fontFamily: fonts.mono,
-                    fontSize: 11,
+                    fontSize: 13,
                     color:
                       repo === "app-factory" && highlightProgress > 0.5
                         ? colors.accent
@@ -249,16 +255,16 @@ export const SelectRepo: React.FC = () => {
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: 8,
-                      padding: "6px 0",
+                      gap: 10,
+                      padding: "8px 0",
                       opacity: lineSpring,
                       transform: `translateX(${interpolate(lineSpring, [0, 1], [-15, 0])}px)`,
                     }}
                   >
                     <div
                       style={{
-                        width: 6,
-                        height: 6,
+                        width: 7,
+                        height: 7,
                         borderRadius: "50%",
                         backgroundColor: colors.textMuted,
                         opacity: 0.4,
@@ -267,7 +273,7 @@ export const SelectRepo: React.FC = () => {
                     <span
                       style={{
                         fontFamily: fonts.body,
-                        fontSize: 13,
+                        fontSize: 15,
                         color: colors.textMuted,
                         opacity: loadingPulse,
                       }}
@@ -301,7 +307,7 @@ export const SelectRepo: React.FC = () => {
             <p
               style={{
                 fontFamily: fonts.mono,
-                fontSize: 14,
+                fontSize: 16,
                 color: colors.textTertiary,
               }}
             >
@@ -336,11 +342,11 @@ export const SelectRepo: React.FC = () => {
       {/* Cursor */}
       <AnimatedCursor
         waypoints={[
-          [960, 400, Math.round(0.3 * fps)],
-          [150, 82, Math.round(0.9 * fps)],
-          [150, 82, Math.round(1.2 * fps)],
-          [150, 108, Math.round(1.8 * fps)],
-          [150, 108, Math.round(2.2 * fps)],
+          [960, 540, Math.round(0.3 * fps)],
+          [260, 210, Math.round(0.9 * fps)],
+          [260, 210, Math.round(1.2 * fps)],
+          [260, 240, Math.round(1.8 * fps)],
+          [260, 240, Math.round(2.2 * fps)],
         ]}
         clickAt={Math.round(2.2 * fps)}
       />

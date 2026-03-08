@@ -68,7 +68,7 @@ export const IdeasPipeline: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: colors.bg, overflow: "hidden" }}>
+    <AbsoluteFill style={{ backgroundColor: colors.bg, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
       {/* Scan lines */}
       <div
         style={{
@@ -81,39 +81,38 @@ export const IdeasPipeline: React.FC = () => {
         }}
       />
 
-      <div style={{ width: "100%", height: "100%", display: "flex" }}>
+      <div style={{ width: 1760, height: 840, display: "flex", borderRadius: 14, border: `1px solid ${colors.border}`, overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.3)" }}>
         {/* Minimal sidebar */}
         <div
           style={{
-            width: 320,
-            height: "100%",
+            width: 380,
             backgroundColor: colors.surface,
             borderRight: `1px solid ${colors.border}`,
             display: "flex",
             flexDirection: "column",
-            padding: "20px 0",
+            padding: "24px 0",
           }}
         >
-          <div style={{ padding: "0 20px 12px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <svg width={24} height={24} viewBox="0 0 32 32" fill="none">
+          <div style={{ padding: "0 24px 14px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <svg width={32} height={32} viewBox="0 0 32 32" fill="none">
                 <path d={LOGO_WAVE_PATH} stroke={colors.accent} strokeWidth="2.5" fill="none" strokeLinecap="round" />
               </svg>
-              <span style={{ fontFamily: fonts.body, fontSize: 17, fontWeight: 700, letterSpacing: "0.08em", color: colors.text }}>FREQUENCY</span>
+              <span style={{ fontFamily: fonts.body, fontSize: 19, fontWeight: 700, letterSpacing: "0.08em", color: colors.text }}>FREQUENCY</span>
             </div>
-            <div style={{ marginTop: 8, fontFamily: fonts.mono, fontSize: 10, color: colors.textTertiary, padding: "5px 8px", border: `1px solid ${colors.accent}`, borderRadius: 3, backgroundColor: colors.bg }}>app-factory</div>
+            <div style={{ marginTop: 10, fontFamily: fonts.mono, fontSize: 13, color: colors.textTertiary, padding: "7px 10px", border: `1px solid ${colors.accent}`, borderRadius: 3, backgroundColor: colors.bg }}>app-factory</div>
           </div>
 
           {/* Lines with ideas highlighted */}
           {["ideas", "build", "deploy", "release-shared", "release", "marketing", "bugjar"].map((name, i) => {
             const isIdeas = name === "ideas";
             return (
-              <div key={name} style={{ display: "flex", flexDirection: "column", gap: 3, padding: "10px 20px", borderLeft: isIdeas ? `2px solid ${colors.accent}` : "2px solid transparent", backgroundColor: isIdeas ? colors.surfaceHover : "transparent" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: colors.positive, boxShadow: `0 0 6px ${colors.positive}` }} />
-                  <span style={{ fontFamily: fonts.body, fontSize: 14, color: isIdeas ? colors.text : colors.textMuted, fontWeight: isIdeas ? 500 : 400 }}>{name}</span>
+              <div key={name} style={{ display: "flex", flexDirection: "column", gap: 3, padding: "11px 24px", borderLeft: isIdeas ? `2px solid ${colors.accent}` : "2px solid transparent", backgroundColor: isIdeas ? colors.surfaceHover : "transparent" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ width: 7, height: 7, borderRadius: "50%", backgroundColor: colors.positive, boxShadow: `0 0 6px ${colors.positive}` }} />
+                  <span style={{ fontFamily: fonts.body, fontSize: 16, color: isIdeas ? colors.text : colors.textMuted, fontWeight: isIdeas ? 500 : 400 }}>{name}</span>
                   {isIdeas && (
-                    <span style={{ marginLeft: "auto", fontFamily: fonts.mono, fontSize: 9, color: colors.accent }}>
+                    <span style={{ marginLeft: "auto", fontFamily: fonts.mono, fontSize: 11, color: colors.accent }}>
                       {validationSprings.filter((s) => s > 0.5).length}/{IDEA_APPS.length}
                     </span>
                   )}
@@ -129,11 +128,11 @@ export const IdeasPipeline: React.FC = () => {
         </div>
 
         {/* Main content */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "16px 32px", gap: 16 }}>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "24px 40px", gap: 16 }}>
           {/* Header */}
           <div>
-            <h2 style={{ fontFamily: fonts.body, fontSize: 26, fontWeight: 800, color: colors.text, letterSpacing: "-0.03em", margin: 0 }}>ideas</h2>
-            <p style={{ fontFamily: fonts.mono, fontSize: 11, color: colors.accent, marginTop: 3 }}>generating & evaluating app ideas</p>
+            <h2 style={{ fontFamily: fonts.body, fontSize: 30, fontWeight: 800, color: colors.text, letterSpacing: "-0.03em", margin: 0 }}>ideas</h2>
+            <p style={{ fontFamily: fonts.mono, fontSize: 13, color: colors.accent, marginTop: 3 }}>generating & evaluating app ideas</p>
           </div>
 
           {/* Pipeline stages bar */}

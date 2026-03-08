@@ -57,7 +57,7 @@ export const HubLive: React.FC = () => {
       {/* Browser chrome */}
       <div
         style={{
-          width: 1400,
+          width: 1700,
           display: "flex",
           flexDirection: "column",
           border: `1px solid ${colors.border}`,
@@ -74,14 +74,14 @@ export const HubLive: React.FC = () => {
             display: "flex",
             alignItems: "center",
             gap: 12,
-            padding: "10px 16px",
+            padding: "12px 20px",
             backgroundColor: colors.surface,
             borderBottom: `1px solid ${colors.border}`,
           }}
         >
-          <div style={{ display: "flex", gap: 7 }}>
+          <div style={{ display: "flex", gap: 8 }}>
             {["#e14f4f", "#d9a83a", "#30D158"].map((c) => (
-              <div key={c} style={{ width: 11, height: 11, borderRadius: "50%", backgroundColor: c }} />
+              <div key={c} style={{ width: 13, height: 13, borderRadius: "50%", backgroundColor: c }} />
             ))}
           </div>
           <div
@@ -91,7 +91,7 @@ export const HubLive: React.FC = () => {
               borderRadius: 6,
               backgroundColor: colors.bg,
               fontFamily: fonts.mono,
-              fontSize: 12,
+              fontSize: 14,
               color: colors.textMuted,
               display: "flex",
               alignItems: "center",
@@ -111,7 +111,7 @@ export const HubLive: React.FC = () => {
         {/* Page content */}
         <div
           style={{
-            padding: "36px 48px 48px",
+            padding: "40px 56px 56px",
             backgroundColor: colors.bg,
             minHeight: 520,
           }}
@@ -126,8 +126,8 @@ export const HubLive: React.FC = () => {
             }}
           >
             <div>
-              <h1 style={{ fontFamily: fonts.body, fontSize: 34, fontWeight: 800, color: colors.text, margin: 0, letterSpacing: "-0.02em" }}>cashewcrate</h1>
-              <p style={{ fontFamily: fonts.mono, fontSize: 12, color: colors.textTertiary, marginTop: 4, textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>App portfolio</p>
+              <h1 style={{ fontFamily: fonts.body, fontSize: 40, fontWeight: 800, color: colors.text, margin: 0, letterSpacing: "-0.02em" }}>cashewcrate</h1>
+              <p style={{ fontFamily: fonts.mono, fontSize: 15, color: colors.textTertiary, marginTop: 5, textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>App portfolio</p>
             </div>
             <span style={{ fontFamily: fonts.mono, fontSize: 14, color: colors.textTertiary }}>{APPS.filter((_, i) => spring({ frame, fps, delay: Math.round(0.8 * fps + i * 0.28 * fps), config: { damping: 200 } }) > 0.5).length} apps</span>
           </div>

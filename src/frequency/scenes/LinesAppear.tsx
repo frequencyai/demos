@@ -73,7 +73,7 @@ export const LinesAppear: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: colors.bg, overflow: "hidden" }}>
+    <AbsoluteFill style={{ backgroundColor: colors.bg, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
       {/* Scan lines */}
       <div
         style={{
@@ -86,12 +86,11 @@ export const LinesAppear: React.FC = () => {
         }}
       />
 
-      <div style={{ width: "100%", height: "100%", display: "flex" }}>
+      <div style={{ width: 1760, height: 840, display: "flex", borderRadius: 14, border: `1px solid ${colors.border}`, overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.3)" }}>
         {/* Sidebar */}
         <div
           style={{
-            width: 320,
-            height: "100%",
+            width: 380,
             backgroundColor: colors.surface,
             borderRight: `1px solid ${colors.border}`,
             display: "flex",
@@ -99,9 +98,9 @@ export const LinesAppear: React.FC = () => {
           }}
         >
           {/* Header */}
-          <div style={{ padding: "20px 20px 12px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <svg width={28} height={28} viewBox="0 0 32 32" fill="none">
+          <div style={{ padding: "24px 24px 14px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <svg width={32} height={32} viewBox="0 0 32 32" fill="none">
                 <path
                   d={LOGO_WAVE_PATH}
                   stroke={colors.accent}
@@ -113,7 +112,7 @@ export const LinesAppear: React.FC = () => {
               <span
                 style={{
                   fontFamily: fonts.body,
-                  fontSize: 17,
+                  fontSize: 19,
                   fontWeight: 700,
                   letterSpacing: "0.08em",
                   color: colors.text,
@@ -134,12 +133,12 @@ export const LinesAppear: React.FC = () => {
 
             <div
               style={{
-                marginTop: 10,
-                padding: "6px 10px",
+                marginTop: 12,
+                padding: "8px 12px",
                 border: `1px solid ${colors.accent}`,
                 borderRadius: 4,
                 fontFamily: fonts.mono,
-                fontSize: 11,
+                fontSize: 13,
                 color: colors.text,
                 backgroundColor: colors.bg,
               }}
@@ -149,7 +148,7 @@ export const LinesAppear: React.FC = () => {
           </div>
 
           {/* Run All button */}
-          <div style={{ padding: "0 20px 12px" }}>
+          <div style={{ padding: "0 24px 14px" }}>
             <div
               style={{
                 display: "inline-flex",
@@ -159,7 +158,7 @@ export const LinesAppear: React.FC = () => {
                 border: `1px solid ${clicked ? colors.positive : colors.accent}`,
                 borderRadius: 4,
                 fontFamily: fonts.mono,
-                fontSize: 10,
+                fontSize: 12,
                 fontWeight: 600,
                 textTransform: "uppercase" as const,
                 letterSpacing: "0.05em",
@@ -190,8 +189,8 @@ export const LinesAppear: React.FC = () => {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 8,
-                  padding: "10px 20px",
+                  gap: 10,
+                  padding: "11px 24px",
                   opacity: line.entrySpring,
                   transform: `translateX(${interpolate(line.entrySpring, [0, 1], [-30, 0])}px)`,
                 }}
@@ -230,7 +229,7 @@ export const LinesAppear: React.FC = () => {
                 <span
                   style={{
                     fontFamily: fonts.body,
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: 450,
                     color: colors.text,
                   }}
@@ -242,7 +241,7 @@ export const LinesAppear: React.FC = () => {
                   style={{
                     marginLeft: "auto",
                     fontFamily: fonts.mono,
-                    fontSize: 9,
+                    fontSize: 11,
                     color: colors.textTertiary,
                     textTransform: "uppercase" as const,
                     letterSpacing: "0.1em",
@@ -261,7 +260,7 @@ export const LinesAppear: React.FC = () => {
             flex: 1,
             display: "flex",
             flexDirection: "column",
-            padding: "16px 36px",
+            padding: "24px 40px",
             gap: 20,
           }}
         >
@@ -270,7 +269,7 @@ export const LinesAppear: React.FC = () => {
             <h2
               style={{
                 fontFamily: fonts.body,
-                fontSize: 26,
+                fontSize: 30,
                 fontWeight: 800,
                 color: colors.text,
                 letterSpacing: "-0.03em",
@@ -282,7 +281,7 @@ export const LinesAppear: React.FC = () => {
             <p
               style={{
                 fontFamily: fonts.mono,
-                fontSize: 12,
+                fontSize: 14,
                 color: colors.accent,
                 marginTop: 4,
               }}
@@ -413,9 +412,9 @@ export const LinesAppear: React.FC = () => {
       {/* Cursor */}
       <AnimatedCursor
         waypoints={[
-          [400, 400, 0],
-          [85, 138, Math.round(allLinesFrame + 0.5 * fps)],
-          [85, 138, clickFrame],
+          [960, 540, 0],
+          [170, 270, Math.round(allLinesFrame + 0.5 * fps)],
+          [170, 270, clickFrame],
         ]}
         clickAt={clickFrame}
       />
