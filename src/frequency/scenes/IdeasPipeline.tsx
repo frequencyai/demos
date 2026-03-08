@@ -8,6 +8,7 @@ import {
   Easing,
 } from "remotion";
 import { colors, fonts, LOGO_WAVE_PATH } from "../theme";
+import { AnimatedCursor } from "../components/Cursor";
 
 const IDEA_APPS = [
   { name: "debtmelt", score: 92, tags: ["finance", "saas"], desc: "Debt snowball calculator" },
@@ -67,20 +68,15 @@ export const IdeasPipeline: React.FC = () => {
     easing: Easing.out(Easing.quad),
   });
 
-  return (
-    <AbsoluteFill style={{ backgroundColor: colors.bg, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-      {/* Scan lines */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)",
-          pointerEvents: "none",
-          zIndex: 40,
-        }}
-      />
+  const SCENE_FRAMES = Math.round(7 * fps);
+  const sidebarClickFrame = SCENE_FRAMES - 35;
 
+  return (
+    <AbsoluteFill style={{ backgroundColor: colors.bg, overflow: "hidden" }}>
+      {/* Scan lines */}
+      <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)", pointerEvents: "none", zIndex: 40 }} />
+
+      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <div style={{ width: 1760, height: 840, display: "flex", borderRadius: 14, border: `1px solid ${colors.border}`, overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.3)" }}>
         {/* Minimal sidebar */}
         <div
@@ -106,8 +102,10 @@ export const IdeasPipeline: React.FC = () => {
           {/* Lines with ideas highlighted */}
           {["ideas", "build", "deploy", "release-shared", "release", "marketing", "bugjar"].map((name, i) => {
             const isIdeas = name === "ideas";
+            const isBuild = name === "build";
+            const highlighted = (isIdeas && frame <= sidebarClickFrame) || (isBuild && frame > sidebarClickFrame);
             return (
-              <div key={name} style={{ display: "flex", flexDirection: "column", gap: 3, padding: "11px 24px", borderLeft: isIdeas ? `2px solid ${colors.accent}` : "2px solid transparent", backgroundColor: isIdeas ? colors.surfaceHover : "transparent" }}>
+              <div key={name} style={{ display: "flex", flexDirection: "column", gap: 3, padding: "11px 24px", borderLeft: highlighted ? `2px solid ${colors.accent}` : "2px solid transparent", backgroundColor: highlighted ? colors.surfaceHover : "transparent" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <div style={{ width: 7, height: 7, borderRadius: "50%", backgroundColor: colors.positive, boxShadow: `0 0 6px ${colors.positive}` }} />
                   <span style={{ fontFamily: fonts.body, fontSize: 16, color: isIdeas ? colors.text : colors.textMuted, fontWeight: isIdeas ? 500 : 400 }}>{name}</span>
@@ -253,6 +251,20 @@ export const IdeasPipeline: React.FC = () => {
           </div>
         </div>
       </div>
+      </div>
+      {/* Cursor — drifts to content, then clicks "build" sidebar */}
+      <AnimatedCursor
+        waypoints={[
+          [140, 257, 0],
+          [800, 350, Math.round(1.5 * fps)],
+          [1100, 400, Math.round(validationStart)],
+          [1100, 400, Math.round(validationStart + 1.5 * fps)],
+          [140, 300, sidebarClickFrame],
+          [140, 300, sidebarClickFrame + 5],
+        ]}
+        clickAt={[sidebarClickFrame]}
+        hideAfter={SCENE_FRAMES - 5}
+      />
     </AbsoluteFill>
   );
 };

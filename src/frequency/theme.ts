@@ -73,10 +73,10 @@ export const DEPLOY_STAGES = [
 
 // Deploy checklist items
 export const DEPLOY_CHECKLIST = [
-  "Polar product created",
+  "Payments integrated",
   "Environment synced",
   "Deployed to Cloudflare",
   "DNS configured",
-  "Hub updated",
+  "App page updated",
   "Health verified",
 ] as const;

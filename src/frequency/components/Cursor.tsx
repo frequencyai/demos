@@ -5,11 +5,16 @@ import { colors } from "../theme";
 export const AnimatedCursor: React.FC<{
   /** Array of [x, y, frameTime] waypoints */
   waypoints: [number, number, number][];
-  /** Frame at which to show a click effect */
-  clickAt?: number;
-}> = ({ waypoints, clickAt }) => {
+  /** Frame(s) at which to show click effects */
+  clickAt?: number | number[];
+  /** Frame at which cursor disappears (for scene exit) */
+  hideAfter?: number;
+}> = ({ waypoints, clickAt, hideAfter }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+
+  // Normalize clicks to array
+  const clicks = clickAt === undefined ? [] : Array.isArray(clickAt) ? clickAt : [clickAt];
 
   // Interpolate position through waypoints
   const times = waypoints.map((w) => w[2]);
@@ -25,16 +30,10 @@ export const AnimatedCursor: React.FC<{
     extrapolateRight: "clamp",
   });
 
-  // Click ripple
-  const showClick = clickAt !== undefined && frame >= clickAt;
-  const clickProgress = showClick
-    ? interpolate(frame, [clickAt, clickAt + 0.4 * fps], [0, 1], {
-        extrapolateRight: "clamp",
-      })
-    : 0;
-
   // Only show after first waypoint time
   if (frame < times[0]) return null;
+  // Hide after specified frame
+  if (hideAfter !== undefined && frame > hideAfter) return null;
 
   return (
     <div
@@ -46,20 +45,30 @@ export const AnimatedCursor: React.FC<{
         zIndex: 100,
       }}
     >
-      {/* Click ripple */}
-      {showClick && clickProgress < 1 && (
-        <div
-          style={{
-            position: "absolute",
-            width: 30 + clickProgress * 20,
-            height: 30 + clickProgress * 20,
-            borderRadius: "50%",
-            border: `2px solid ${colors.accent}`,
-            opacity: 1 - clickProgress,
-            transform: "translate(-50%, -50%)",
-          }}
-        />
-      )}
+      {/* Click ripples */}
+      {clicks.map((clickFrame) => {
+        const active = frame >= clickFrame;
+        const progress = active
+          ? interpolate(frame, [clickFrame, clickFrame + 0.4 * fps], [0, 1], {
+              extrapolateRight: "clamp",
+            })
+          : 0;
+        if (!active || progress >= 1) return null;
+        return (
+          <div
+            key={clickFrame}
+            style={{
+              position: "absolute",
+              width: 30 + progress * 20,
+              height: 30 + progress * 20,
+              borderRadius: "50%",
+              border: `2px solid ${colors.accent}`,
+              opacity: 1 - progress,
+              transform: "translate(-50%, -50%)",
+            }}
+          />
+        );
+      })}
 
       {/* Cursor */}
       <svg
