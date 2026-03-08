@@ -26,95 +26,61 @@ export const DemoVideo: React.FC<z.infer<typeof DemoVideoSchema>> = () => {
   const smoothFade = (dur: number) =>
     springTiming({ config: { damping: 200 }, durationInFrames: t(dur) });
 
-  // Slightly faster slide
-  const smoothSlide = (dur: number) =>
-    springTiming({ config: { damping: 200 }, durationInFrames: t(dur) });
-
   return (
     <TransitionSeries>
-      {/* Scene 1: Hero intro */}
-      <TransitionSeries.Sequence durationInFrames={t(3.5)}>
+      {/* Scene 1: Hero intro — +1.5s hold */}
+      <TransitionSeries.Sequence durationInFrames={t(5)}>
         <HeroIntro />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
         presentation={fade()}
-        timing={smoothFade(0.7)}
+        timing={smoothFade(0.8)}
       />
 
-      {/* Scene 2: Select target repo */}
-      <TransitionSeries.Sequence durationInFrames={t(3.5)}>
+      {/* Scene 2: Select target repo — +1s hold */}
+      <TransitionSeries.Sequence durationInFrames={t(4.5)}>
         <SelectRepo />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
         presentation={fade()}
-        timing={smoothFade(0.6)}
+        timing={smoothFade(0.7)}
       />
 
-      {/* Scene 3: Start Frequency skill */}
-      <TransitionSeries.Sequence durationInFrames={t(6)}>
+      {/* Scene 3: Start Frequency skill — +1.5s hold to see "Ready" */}
+      <TransitionSeries.Sequence durationInFrames={t(7.5)}>
         <StartSkill />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
         presentation={fade()}
-        timing={smoothFade(0.7)}
+        timing={smoothFade(0.8)}
       />
 
-      {/* Scene 4: Lines build + Run All */}
-      <TransitionSeries.Sequence durationInFrames={t(5)}>
+      {/* Scene 4: Lines build + Run All — +1.5s hold to see all green */}
+      <TransitionSeries.Sequence durationInFrames={t(6.5)}>
         <LinesAppear />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
         presentation={slide({ direction: "from-right" })}
-        timing={smoothSlide(0.5)}
+        timing={smoothFade(0.6)}
       />
 
-      {/* Scene 5: Ideas pipeline */}
-      <TransitionSeries.Sequence durationInFrames={t(5.5)}>
+      {/* Scene 5: Ideas pipeline — +1.5s hold to see validated cards */}
+      <TransitionSeries.Sequence durationInFrames={t(7)}>
         <IdeasPipeline />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
         presentation={slide({ direction: "from-right" })}
-        timing={smoothSlide(0.5)}
+        timing={smoothFade(0.6)}
       />
 
-      {/* Scene 6: Build pipeline */}
-      <TransitionSeries.Sequence durationInFrames={t(5.5)}>
+      {/* Scene 6: Build pipeline — +2s hold to see promoted */}
+      <TransitionSeries.Sequence durationInFrames={t(8)}>
         <BuildPipeline />
-      </TransitionSeries.Sequence>
-
-      <TransitionSeries.Transition
-        presentation={fade()}
-        timing={smoothFade(0.6)}
-      />
-
-      {/* Scene 7: Deploy checklist */}
-      <TransitionSeries.Sequence durationInFrames={t(4.5)}>
-        <DeployChecklist />
-      </TransitionSeries.Sequence>
-
-      <TransitionSeries.Transition
-        presentation={slide({ direction: "from-right" })}
-        timing={smoothSlide(0.5)}
-      />
-
-      {/* Scene 8: Repo updates */}
-      <TransitionSeries.Sequence durationInFrames={t(3.5)}>
-        <RepoUpdates />
-      </TransitionSeries.Sequence>
-
-      <TransitionSeries.Transition
-        presentation={fade()}
-        timing={smoothFade(0.6)}
-      />
-
-      {/* Scene 9: Hub live */}
-      <TransitionSeries.Sequence durationInFrames={t(5)}>
-        <HubLive />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
@@ -122,8 +88,38 @@ export const DemoVideo: React.FC<z.infer<typeof DemoVideoSchema>> = () => {
         timing={smoothFade(0.7)}
       />
 
-      {/* Scene 10: Outro */}
-      <TransitionSeries.Sequence durationInFrames={t(3.5)}>
+      {/* Scene 7: Deploy checklist — +1.5s hold to see all checked */}
+      <TransitionSeries.Sequence durationInFrames={t(6)}>
+        <DeployChecklist />
+      </TransitionSeries.Sequence>
+
+      <TransitionSeries.Transition
+        presentation={fade()}
+        timing={smoothFade(0.6)}
+      />
+
+      {/* Scene 8: Repo updates — +1.5s hold */}
+      <TransitionSeries.Sequence durationInFrames={t(5)}>
+        <RepoUpdates />
+      </TransitionSeries.Sequence>
+
+      <TransitionSeries.Transition
+        presentation={fade()}
+        timing={smoothFade(0.7)}
+      />
+
+      {/* Scene 9: Hub live — +1.5s hold to see all apps */}
+      <TransitionSeries.Sequence durationInFrames={t(6.5)}>
+        <HubLive />
+      </TransitionSeries.Sequence>
+
+      <TransitionSeries.Transition
+        presentation={fade()}
+        timing={smoothFade(0.8)}
+      />
+
+      {/* Scene 10: Outro — +1s hold */}
+      <TransitionSeries.Sequence durationInFrames={t(4.5)}>
         <Outro />
       </TransitionSeries.Sequence>
     </TransitionSeries>

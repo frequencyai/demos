@@ -34,8 +34,36 @@ export const BuildPipeline: React.FC = () => {
     );
   };
 
-  const getAppStage = (appIndex: number): number =>
-    Math.floor(getAppStageProgress(appIndex));
+  // Staircase function: hold each stage for a dwell period before jumping
+  // This prevents jitter by snapping to stages with hysteresis
+  const getAppStage = (appIndex: number): number => {
+    const progress = getAppStageProgress(appIndex);
+    const stage = Math.floor(progress);
+    const frac = progress - stage;
+    // Only advance to next stage when progress is >70% through current stage
+    // This creates a clean hold-then-snap behavior
+    if (frac > 0.7 && stage < BUILD_STAGES.length - 1) {
+      return stage + 1;
+    }
+    return stage;
+  };
+
+  // Get opacity for a card in a given column (cross-fade during transitions)
+  const getCardOpacityInStage = (appIndex: number, stageIndex: number): number => {
+    const progress = getAppStageProgress(appIndex);
+    const currentStage = getAppStage(appIndex);
+    if (currentStage !== stageIndex) return 0;
+    // Fade in when entering, fade out when leaving
+    const frac = progress - Math.floor(progress);
+    if (Math.floor(progress) === stageIndex) {
+      // In the stage based on floor — fade out as we approach threshold
+      if (frac > 0.6) return interpolate(frac, [0.6, 0.7], [1, 0.3], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+      return 1;
+    }
+    // Just entered via threshold — fade in
+    if (frac > 0.7) return interpolate(frac, [0.7, 0.85], [0.3, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+    return 1;
+  };
 
   // Overall sidebar progress
   const overallProgress = interpolate(frame, [0, 4.8 * fps], [0, 1], {
@@ -125,6 +153,7 @@ export const BuildPipeline: React.FC = () => {
                 ai,
                 inStage: getAppStage(ai) === index,
                 stageProgress: getAppStageProgress(ai),
+                fadeOpacity: getCardOpacityInStage(ai, index),
               })).filter((a) => a.inStage);
 
               return (
@@ -140,7 +169,7 @@ export const BuildPipeline: React.FC = () => {
                       <div key={app.name} style={{
                         padding: "10px 12px", border: `1px solid ${isTerminal ? "rgba(48, 209, 88, 0.15)" : colors.border}`, borderRadius: 7,
                         backgroundColor: isTerminal ? "rgba(48, 209, 88, 0.03)" : colors.surface,
-                        transform: `scale(${interpolate(cardSpring, [0, 1], [0.9, 1])})`, opacity: cardSpring,
+                        transform: `scale(${interpolate(cardSpring, [0, 1], [0.9, 1])})`, opacity: cardSpring * app.fadeOpacity,
                         display: "flex", flexDirection: "column", gap: 5,
                       }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>

@@ -57,7 +57,7 @@ export const HubLive: React.FC = () => {
       {/* Browser chrome */}
       <div
         style={{
-          width: 940,
+          width: 1400,
           display: "flex",
           flexDirection: "column",
           border: `1px solid ${colors.border}`,
@@ -111,9 +111,9 @@ export const HubLive: React.FC = () => {
         {/* Page content */}
         <div
           style={{
-            padding: "28px 36px 36px",
+            padding: "36px 48px 48px",
             backgroundColor: colors.bg,
-            minHeight: 440,
+            minHeight: 520,
           }}
         >
           {/* Site header */}
@@ -126,14 +126,14 @@ export const HubLive: React.FC = () => {
             }}
           >
             <div>
-              <h1 style={{ fontFamily: fonts.body, fontSize: 26, fontWeight: 800, color: colors.text, margin: 0, letterSpacing: "-0.02em" }}>cashewcrate</h1>
-              <p style={{ fontFamily: fonts.mono, fontSize: 10, color: colors.textTertiary, marginTop: 3, textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>App portfolio</p>
+              <h1 style={{ fontFamily: fonts.body, fontSize: 34, fontWeight: 800, color: colors.text, margin: 0, letterSpacing: "-0.02em" }}>cashewcrate</h1>
+              <p style={{ fontFamily: fonts.mono, fontSize: 12, color: colors.textTertiary, marginTop: 4, textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>App portfolio</p>
             </div>
-            <span style={{ fontFamily: fonts.mono, fontSize: 11, color: colors.textTertiary }}>{APPS.filter((_, i) => spring({ frame, fps, delay: Math.round(0.8 * fps + i * 0.28 * fps), config: { damping: 200 } }) > 0.5).length} apps</span>
+            <span style={{ fontFamily: fonts.mono, fontSize: 14, color: colors.textTertiary }}>{APPS.filter((_, i) => spring({ frame, fps, delay: Math.round(0.8 * fps + i * 0.28 * fps), config: { damping: 200 } }) > 0.5).length} apps</span>
           </div>
 
           {/* App grid */}
-          <div style={{ display: "flex", flexWrap: "wrap" as const, gap: 14 }}>
+          <div style={{ display: "flex", flexWrap: "wrap" as const, gap: 20 }}>
             {APPS.map((app, i) => {
               const cardSpring = spring({
                 frame,
@@ -154,14 +154,14 @@ export const HubLive: React.FC = () => {
                 <div
                   key={app.name}
                   style={{
-                    width: 196,
-                    padding: "18px 16px",
+                    width: 400,
+                    padding: "22px 20px",
                     border: `1px solid ${colors.border}`,
-                    borderRadius: 10,
+                    borderRadius: 12,
                     backgroundColor: colors.surface,
                     display: "flex",
                     flexDirection: "column",
-                    gap: 10,
+                    gap: 12,
                     opacity: cardSpring,
                     transform: `scale(${interpolate(cardSpring, [0, 1], [0.8, 1])}) translateY(${interpolate(cardSpring, [0, 1], [25, 0])}px)`,
                   }}
@@ -169,15 +169,15 @@ export const HubLive: React.FC = () => {
                   {/* App icon */}
                   <div
                     style={{
-                      width: 38,
-                      height: 38,
-                      borderRadius: 8,
+                      width: 52,
+                      height: 52,
+                      borderRadius: 12,
                       backgroundColor: app.color,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       fontFamily: fonts.body,
-                      fontSize: 17,
+                      fontSize: 24,
                       fontWeight: 700,
                       color: "white",
                       boxShadow: `0 4px 12px ${app.color}33`,
@@ -187,21 +187,21 @@ export const HubLive: React.FC = () => {
                   </div>
 
                   <div>
-                    <h3 style={{ fontFamily: fonts.body, fontSize: 14, fontWeight: 600, color: colors.text, margin: 0 }}>{app.name}</h3>
-                    <p style={{ fontFamily: fonts.body, fontSize: 10, color: colors.textMuted, marginTop: 2 }}>{app.desc}</p>
+                    <h3 style={{ fontFamily: fonts.body, fontSize: 20, fontWeight: 600, color: colors.text, margin: 0 }}>{app.name}</h3>
+                    <p style={{ fontFamily: fonts.body, fontSize: 14, color: colors.textMuted, marginTop: 3 }}>{app.desc}</p>
                   </div>
 
                   {/* Live badge */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 5, opacity: liveSpring }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6, opacity: liveSpring }}>
                     <div
                       style={{
-                        width: 6, height: 6, borderRadius: "50%",
+                        width: 8, height: 8, borderRadius: "50%",
                         backgroundColor: colors.positive,
                         boxShadow: `0 0 ${4 + liveSpring * 6}px ${colors.positive}`,
                         transform: `scale(${liveSpring})`,
                       }}
                     />
-                    <span style={{ fontFamily: fonts.mono, fontSize: 8, color: colors.positive, textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>live</span>
+                    <span style={{ fontFamily: fonts.mono, fontSize: 11, color: colors.positive, textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>live</span>
                   </div>
                 </div>
               );

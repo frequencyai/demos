@@ -4,8 +4,8 @@ import "./index.css";
 import { FrequencyShowcase, FrequencyShowcaseSchema } from "./frequency/Showcase";
 import { DemoVideo, DemoVideoSchema } from "./frequency/DemoVideo";
 
-// Total duration: 10 scenes (~45.5s) minus ~5.6s transitions ≈ 40s
-const DEMO_DURATION_FRAMES = 1200;
+// Total duration: 10 scenes (~60.5s) minus ~6.3s transitions ≈ 54s
+const DEMO_DURATION_FRAMES = 1620;
 
 export const RemotionRoot = () => {
   return (

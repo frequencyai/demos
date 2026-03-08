@@ -71,7 +71,7 @@ export const DeployChecklist: React.FC = () => {
         />
       )}
 
-      <div style={{ display: "flex", gap: 56, alignItems: "flex-start", width: 920 }}>
+      <div style={{ display: "flex", gap: 64, alignItems: "flex-start", width: 1100 }}>
         {/* Left: progress ring + info */}
         <div
           style={{
@@ -85,28 +85,28 @@ export const DeployChecklist: React.FC = () => {
           }}
         >
           {/* Progress ring */}
-          <div style={{ position: "relative", width: 110, height: 110 }}>
-            <svg width={110} height={110} viewBox="0 0 110 110" style={{ transform: "rotate(-90deg)" }}>
-              <circle cx="55" cy="55" r="48" fill="none" stroke={colors.borderLight} strokeWidth="3.5" />
+          <div style={{ position: "relative", width: 140, height: 140 }}>
+            <svg width={140} height={140} viewBox="0 0 140 140" style={{ transform: "rotate(-90deg)" }}>
+              <circle cx="70" cy="70" r="60" fill="none" stroke={colors.borderLight} strokeWidth="4" />
               <circle
-                cx="55" cy="55" r="48" fill="none"
+                cx="70" cy="70" r="60" fill="none"
                 stroke={allDone ? colors.positive : colors.accent}
-                strokeWidth="3.5"
+                strokeWidth="4"
                 strokeLinecap="round"
-                strokeDasharray={ringCircumference}
-                strokeDashoffset={ringCircumference * (1 - ringProgress)}
+                strokeDasharray={2 * Math.PI * 60}
+                strokeDashoffset={2 * Math.PI * 60 * (1 - ringProgress)}
               />
             </svg>
             <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ fontFamily: fonts.mono, fontSize: 22, fontWeight: 700, color: allDone ? colors.positive : colors.text, fontVariantNumeric: "tabular-nums" }}>
+              <span style={{ fontFamily: fonts.mono, fontSize: 28, fontWeight: 700, color: allDone ? colors.positive : colors.text, fontVariantNumeric: "tabular-nums" }}>
                 {completedCount}/{DEPLOY_CHECKLIST.length}
               </span>
             </div>
           </div>
 
           <div style={{ textAlign: "center" }}>
-            <h2 style={{ fontFamily: fonts.body, fontSize: 26, fontWeight: 800, color: colors.text, letterSpacing: "-0.02em", margin: 0 }}>Deploy</h2>
-            <p style={{ fontFamily: fonts.mono, fontSize: 12, color: colors.accent, marginTop: 4 }}>
+            <h2 style={{ fontFamily: fonts.body, fontSize: 32, fontWeight: 800, color: colors.text, letterSpacing: "-0.02em", margin: 0 }}>Deploy</h2>
+            <p style={{ fontFamily: fonts.mono, fontSize: 14, color: colors.accent, marginTop: 4 }}>
               debtmelt · weekpulse · pennyscope
             </p>
           </div>
@@ -184,9 +184,9 @@ export const DeployChecklist: React.FC = () => {
                   )}
                 </div>
 
-                <span style={{ fontFamily: fonts.body, fontSize: 17, fontWeight: 500, color: checked ? colors.positive : colors.text, flex: 1 }}>{item}</span>
+                <span style={{ fontFamily: fonts.body, fontSize: 19, fontWeight: 500, color: checked ? colors.positive : colors.text, flex: 1 }}>{item}</span>
 
-                <span style={{ fontFamily: fonts.mono, fontSize: 11, color: checked ? colors.positive : colors.textTertiary, textTransform: "uppercase" as const, letterSpacing: "0.12em", opacity: checked ? 1 : 0.6 }}>
+                <span style={{ fontFamily: fonts.mono, fontSize: 13, color: checked ? colors.positive : colors.textTertiary, textTransform: "uppercase" as const, letterSpacing: "0.12em", opacity: checked ? 1 : 0.6 }}>
                   {checked ? "done" : "pending"}
                 </span>
               </div>
