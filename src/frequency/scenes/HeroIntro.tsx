@@ -69,20 +69,16 @@ export const HeroIntro: React.FC = () => {
     }
   );
 
-  // ── Tagline typewriter ──
+  // ── Tagline spring entrance ──
   const tagline = "Autonomous agent orchestration";
-  const tagStart = 2.0 * fps;
-  const charFrames = 1.5;
-  const typedCount = Math.min(
-    tagline.length,
-    Math.max(0, Math.floor((frame - tagStart) / charFrames))
-  );
-  const tagOpacity = interpolate(frame, [tagStart, tagStart + 6], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
+  const tagSpring = spring({
+    frame,
+    fps,
+    delay: Math.round(2.0 * fps),
+    config: { damping: 200 },
   });
   const cursorVisible =
-    frame >= tagStart && frame % Math.round(fps / 2) < fps / 4;
+    frame >= Math.round(2.0 * fps) && frame % Math.round(fps / 2) < fps / 4;
 
   // ── Subtle vignette ──
   const vignetteOpacity = interpolate(frame, [0, fps], [0, 0.6], {
@@ -238,7 +234,7 @@ export const HeroIntro: React.FC = () => {
           }}
         />
 
-        {/* Tagline typewriter */}
+        {/* Tagline */}
         <div
           style={{
             fontFamily: fonts.mono,
@@ -246,11 +242,12 @@ export const HeroIntro: React.FC = () => {
             color: colors.textTertiary,
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            opacity: tagOpacity,
+            opacity: tagSpring,
+            transform: `translateY(${interpolate(tagSpring, [0, 1], [10, 0])}px)`,
             minHeight: 20,
           }}
         >
-          <span>{tagline.slice(0, typedCount)}</span>
+          <span>{tagline}</span>
           <span
             style={{
               color: colors.accent,

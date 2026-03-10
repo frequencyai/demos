@@ -27,7 +27,9 @@ const SKILL_LINES = [
   "  → release.frequency.yaml",
   "  → marketing.frequency.yaml",
   "  → bugjar.frequency.yaml",
-  "7 factory lines initialized ✓",
+  "  → seo.frequency.yaml",
+  "  → self-improvement.frequency.yaml",
+  "9 factory lines initialized ✓",
 ];
 
 export const StartSkill: React.FC = () => {
@@ -84,6 +86,14 @@ export const StartSkill: React.FC = () => {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.quad),
+  });
+
+  // Narration slide-in
+  const narrationSpring = spring({
+    frame,
+    fps,
+    delay: Math.round(0.5 * fps),
+    config: { damping: 200 },
   });
 
   // Done state
@@ -379,6 +389,31 @@ export const StartSkill: React.FC = () => {
         ]}
         clickAt={clickFrame}
       />
+
+      {/* Narration */}
+      <div style={{
+        position: "absolute",
+        bottom: 80,
+        left: 0,
+        right: 0,
+        display: "flex",
+        justifyContent: "center",
+        opacity: narrationSpring,
+        transform: `translateY(${interpolate(narrationSpring, [0, 1], [16, 0])}px)`,
+      }}>
+        <span style={{
+          fontFamily: fonts.body,
+          fontWeight: 800,
+          fontSize: 48,
+          color: colors.text,
+          letterSpacing: "-0.02em",
+          textAlign: "center",
+          maxWidth: 1600,
+          lineHeight: 1.3,
+        }}>
+          One command. Every workflow configured.
+        </span>
+      </div>
     </AbsoluteFill>
   );
 };

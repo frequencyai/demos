@@ -65,6 +65,14 @@ export const SelectRepo: React.FC = () => {
         )
       : 0;
 
+  // Narration slide-in
+  const narrationSpring = spring({
+    frame,
+    fps,
+    delay: Math.round(0.8 * fps),
+    config: { damping: 200 },
+  });
+
   const repos = ["app-factory", "content creation", "growth marketing"];
 
   return (
@@ -74,6 +82,7 @@ export const SelectRepo: React.FC = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        paddingBottom: 92,
         overflow: "hidden",
       }}
     >
@@ -81,7 +90,7 @@ export const SelectRepo: React.FC = () => {
       <div
         style={{
           width: 1760,
-          height: 840,
+          height: 600,
           display: "flex",
           borderRadius: 14,
           border: `1px solid ${colors.border}`,
@@ -179,7 +188,7 @@ export const SelectRepo: React.FC = () => {
             <div
               style={{
                 position: "absolute",
-                top: 94,
+                top: 118,
                 left: 16,
                 right: 16,
                 backgroundColor: colors.bg,
@@ -331,13 +340,38 @@ export const SelectRepo: React.FC = () => {
       <AnimatedCursor
         waypoints={[
           [960, 540, Math.round(0.3 * fps)],
-          [260, 210, Math.round(0.9 * fps)],
-          [260, 210, Math.round(1.2 * fps)],
-          [260, 240, Math.round(1.8 * fps)],
-          [260, 240, Math.round(2.2 * fps)],
+          [260, 284, Math.round(0.9 * fps)],
+          [260, 284, Math.round(1.2 * fps)],
+          [260, 314, Math.round(1.8 * fps)],
+          [260, 314, Math.round(2.2 * fps)],
         ]}
         clickAt={Math.round(2.2 * fps)}
       />
+
+      {/* Narration */}
+      <div style={{
+        position: "absolute",
+        top: 824,
+        left: 0,
+        right: 0,
+        display: "flex",
+        justifyContent: "center",
+        opacity: narrationSpring,
+        transform: `translateY(${interpolate(narrationSpring, [0, 1], [16, 0])}px)`,
+      }}>
+        <span style={{
+          fontFamily: fonts.body,
+          fontWeight: 800,
+          fontSize: 48,
+          color: colors.text,
+          letterSpacing: "-0.02em",
+          textAlign: "center",
+          maxWidth: 1600,
+          lineHeight: 1.3,
+        }}>
+          Point Frequency at any repo. It finds your workflows.
+        </span>
+      </div>
     </AbsoluteFill>
   );
 };

@@ -49,12 +49,6 @@ export const TextSlide: React.FC<{
     config: { damping: 200, stiffness: 100 },
   });
 
-  // Accent glow behind text
-  const glowOpacity = interpolate(frame, [0.3 * fps, 1 * fps], [0, 0.15], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-
   // Subtle wave logo in corner
   const waveOpacity = interpolate(frame, [0, 0.5 * fps], [0, 0.12], {
     extrapolateLeft: "clamp",
@@ -71,19 +65,6 @@ export const TextSlide: React.FC<{
         overflow: "hidden",
       }}
     >
-      {/* Subtle accent glow */}
-      <div
-        style={{
-          position: "absolute",
-          width: 600,
-          height: 600,
-          borderRadius: "50%",
-          background: `radial-gradient(circle, ${colors.accent} 0%, transparent 70%)`,
-          opacity: glowOpacity,
-          pointerEvents: "none",
-        }}
-      />
-
       {/* Small wave mark */}
       <svg
         width={40}

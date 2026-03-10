@@ -203,7 +203,7 @@ export const Outro: React.FC = () => {
             transform: `translateY(${interpolate(urlSpring, [0, 1], [10, 0])}px)`,
           }}
         >
-          github.com/frequencyai
+          frequency.sh
         </p>
       </div>
     </AbsoluteFill>

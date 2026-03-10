@@ -49,15 +49,23 @@ export const DeployChecklist: React.FC = () => {
     easing: Easing.out(Easing.quad),
   });
 
+  // Narration slide-in
+  const narrationSpring = spring({
+    frame,
+    fps,
+    delay: Math.round(0.5 * fps),
+    config: { damping: 200 },
+  });
+
   const ringCompleteFrame = 0.8 * fps + DEPLOY_CHECKLIST.length * 0.4 * fps;
 
   return (
     <AbsoluteFill style={{ backgroundColor: colors.bg, overflow: "hidden" }}>
 
-      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div style={{ width: 1760, height: 840, display: "flex", borderRadius: 14, border: `1px solid ${colors.border}`, overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.3)" }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column" as const, alignItems: "center", justifyContent: "center", paddingBottom: 92 }}>
+      <div style={{ width: 1760, height: 600, display: "flex", borderRadius: 14, border: `1px solid ${colors.border}`, overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.3)" }}>
         {/* Sidebar */}
-        <div style={{ width: 380, backgroundColor: colors.surface, borderRight: `1px solid ${colors.border}`, display: "flex", flexDirection: "column", padding: "24px 0" }}>
+        <div style={{ width: 380, backgroundColor: colors.surface, borderRight: `1px solid ${colors.border}`, display: "flex", flexDirection: "column", padding: "24px 0 20px" }}>
           <div style={{ padding: "0 24px 14px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <svg width={32} height={32} viewBox="0 0 32 32" fill="none">
@@ -83,7 +91,7 @@ export const DeployChecklist: React.FC = () => {
             ))}
           </div>
 
-          {["ideas", "build", "deploy", "release-shared", "release", "marketing", "bugjar"].map((name) => {
+          {["ideas", "build", "deploy", "release-shared", "release", "marketing", "seo", "bugjar", "self-improvement"].map((name) => {
             const isDeploy = name === "deploy";
             return (
               <div key={name} style={{ display: "flex", flexDirection: "column", gap: 3, padding: "11px 24px", borderLeft: isDeploy ? `2px solid ${colors.accent}` : "2px solid transparent", backgroundColor: isDeploy ? colors.surfaceHover : "transparent" }}>
@@ -245,13 +253,38 @@ export const DeployChecklist: React.FC = () => {
       {/* Cursor — watches checklist complete, then hides */}
       <AnimatedCursor
         waypoints={[
-          [140, 340, 0],
-          [800, 350, Math.round(0.8 * fps)],
-          [600, 370, Math.round(ringCompleteFrame)],
-          [600, 370, Math.round(ringCompleteFrame + 20)],
+          [140, 414, 0],
+          [800, 424, Math.round(0.8 * fps)],
+          [600, 444, Math.round(ringCompleteFrame)],
+          [600, 444, Math.round(ringCompleteFrame + 20)],
         ]}
         hideAfter={Math.round(ringCompleteFrame + 30)}
       />
+
+      {/* Narration */}
+      <div style={{
+        position: "absolute",
+        top: 824,
+        left: 0,
+        right: 0,
+        display: "flex",
+        justifyContent: "center",
+        opacity: narrationSpring,
+        transform: `translateY(${interpolate(narrationSpring, [0, 1], [16, 0])}px)`,
+      }}>
+        <span style={{
+          fontFamily: fonts.body,
+          fontWeight: 800,
+          fontSize: 48,
+          color: colors.text,
+          letterSpacing: "-0.02em",
+          textAlign: "center",
+          maxWidth: 1600,
+          lineHeight: 1.3,
+        }}>
+          Every step verified before shipping.
+        </span>
+      </div>
     </AbsoluteFill>
   );
 };

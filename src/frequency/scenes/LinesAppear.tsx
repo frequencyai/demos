@@ -82,8 +82,16 @@ export const LinesAppear: React.FC = () => {
 
   // WIP count animates after click
   const wipCount = clicked
-    ? Math.min(7, Math.round(interpolate(frame, [clickFrame, clickFrame + fps], [0, 7], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })))
+    ? Math.min(9, Math.round(interpolate(frame, [clickFrame, clickFrame + fps], [0, 9], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })))
     : 0;
+
+  // Narration slide-in
+  const narrationSpring = spring({
+    frame,
+    fps,
+    delay: Math.round(0.5 * fps),
+    config: { damping: 200 },
+  });
 
   // Sidebar click frame
   const sidebarClickFrame = SCENE_FRAMES - 35;
@@ -91,8 +99,8 @@ export const LinesAppear: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: colors.bg, overflow: "hidden" }}>
 
-      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: 1760, height: 840, display: "flex", borderRadius: 14, border: `1px solid ${colors.border}`, overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.3)" }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column" as const, alignItems: "center", justifyContent: "center", paddingBottom: 92 }}>
+        <div style={{ width: 1760, height: 600, display: "flex", borderRadius: 14, border: `1px solid ${colors.border}`, overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.3)" }}>
           {/* Sidebar */}
           <div style={{ width: 380, backgroundColor: colors.surface, borderRight: `1px solid ${colors.border}`, display: "flex", flexDirection: "column" }}>
             <div style={{ padding: "24px 24px 14px" }}>
@@ -138,7 +146,7 @@ export const LinesAppear: React.FC = () => {
               ))}
             </div>
 
-            <div style={{ flex: 1, overflow: "hidden" }}>
+            <div style={{ flex: 1, overflow: "hidden", paddingBottom: 20 }}>
               {lineData.map((line, i) => {
                 const isIdeas = line.name === "ideas";
                 const ideasHighlight = isIdeas && frame > sidebarClickFrame;
@@ -173,7 +181,7 @@ export const LinesAppear: React.FC = () => {
           <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "24px 40px", gap: 16 }}>
             <div>
               <h2 style={{ fontFamily: fonts.body, fontSize: 30, fontWeight: 800, color: colors.text, letterSpacing: "-0.03em", margin: 0 }}>app-factory</h2>
-              <p style={{ fontFamily: fonts.mono, fontSize: 14, color: colors.accent, marginTop: 4 }}>7 parallel pipelines</p>
+              <p style={{ fontFamily: fonts.mono, fontSize: 14, color: colors.accent, marginTop: 4 }}>9 parallel pipelines</p>
             </div>
 
             {/* Pipeline segments */}
@@ -207,7 +215,7 @@ export const LinesAppear: React.FC = () => {
             {clicked && (
               <div style={{ padding: "10px 16px", border: `1px solid rgba(48, 209, 88, 0.2)`, borderRadius: 6, fontFamily: fonts.mono, fontSize: 11, color: colors.positive, backgroundColor: "rgba(48, 209, 88, 0.04)", opacity: statusSpring, transform: `translateY(${interpolate(statusSpring, [0, 1], [8, 0])}px)`, display: "flex", alignItems: "center", gap: 8 }}>
                 <div style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: colors.positive, boxShadow: `0 0 8px ${colors.positive}` }} />
-                All 7 pipelines running
+                All 9 pipelines running
               </div>
             )}
           </div>
@@ -217,15 +225,40 @@ export const LinesAppear: React.FC = () => {
         <AnimatedCursor
           waypoints={[
             [960, 540, 0],
-            [140, 249, Math.round(allLinesFrame + 0.5 * fps)],
-            [140, 249, clickFrame],
-            [140, 249, clickFrame + 15],
-            [140, 295, sidebarClickFrame],
-            [140, 295, sidebarClickFrame + 5],
+            [140, 323, Math.round(allLinesFrame + 0.5 * fps)],
+            [140, 323, clickFrame],
+            [140, 323, clickFrame + 15],
+            [140, 369, sidebarClickFrame],
+            [140, 369, sidebarClickFrame + 5],
           ]}
           clickAt={[clickFrame, sidebarClickFrame]}
           hideAfter={SCENE_FRAMES - 5}
         />
+      </div>
+
+      {/* Narration */}
+      <div style={{
+        position: "absolute",
+        top: 824,
+        left: 0,
+        right: 0,
+        display: "flex",
+        justifyContent: "center",
+        opacity: narrationSpring,
+        transform: `translateY(${interpolate(narrationSpring, [0, 1], [16, 0])}px)`,
+      }}>
+        <span style={{
+          fontFamily: fonts.body,
+          fontWeight: 800,
+          fontSize: 48,
+          color: colors.text,
+          letterSpacing: "-0.02em",
+          textAlign: "center",
+          maxWidth: 1600,
+          lineHeight: 1.3,
+        }}>
+          Parallel pipelines. State-coordinated.
+        </span>
       </div>
     </AbsoluteFill>
   );

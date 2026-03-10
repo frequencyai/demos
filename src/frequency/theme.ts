@@ -18,11 +18,12 @@ export const colors = {
 } as const;
 
 // Import font loader to ensure fonts are registered
-import { albertSansFamily, ibmPlexMonoFamily } from "./fonts";
+import { albertSansFamily, ibmPlexMonoFamily, bitterFamily } from "./fonts";
 
 export const fonts = {
   mono: ibmPlexMonoFamily,
   body: albertSansFamily,
+  serif: bitterFamily,
 } as const;
 
 // Logo SVG path (frequency wave)
@@ -37,7 +38,9 @@ export const LINES = [
   { name: "release-shared", group: "ship" },
   { name: "release", group: "ship" },
   { name: "marketing", group: "ship" },
+  { name: "seo", group: "ship" },
   { name: "bugjar", group: "support" },
+  { name: "self-improvement", group: "support" },
 ] as const;
 
 // Example app names from app-factory
