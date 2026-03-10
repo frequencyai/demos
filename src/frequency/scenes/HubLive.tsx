@@ -60,8 +60,6 @@ export const HubLive: React.FC = () => {
         overflow: "hidden",
       }}
     >
-      <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)", pointerEvents: "none", zIndex: 40 }} />
-
       {/* Browser chrome */}
       <div
         style={{

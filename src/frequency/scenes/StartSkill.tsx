@@ -107,18 +107,6 @@ export const StartSkill: React.FC = () => {
         overflow: "hidden",
       }}
     >
-      {/* Scan lines */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)",
-          pointerEvents: "none",
-          zIndex: 40,
-        }}
-      />
-
       <div
         style={{
           display: "flex",
@@ -191,7 +179,7 @@ export const StartSkill: React.FC = () => {
                   marginTop: 3,
                 }}
               >
-                Autonomous workflow automation skill
+                Autonomous agent orchestration
               </p>
             </div>
 
@@ -382,13 +370,12 @@ export const StartSkill: React.FC = () => {
         )}
       </div>
 
-      {/* Cursor */}
+      {/* Cursor — moves to the Start button on the right side of the card */}
       <AnimatedCursor
         waypoints={[
           [960, 600, Math.round(0.3 * fps)],
-          [700, 230, Math.round(0.8 * fps)],
-          [700, 230, Math.round(1.0 * fps)],
-          [700, 230, clickFrame],
+          [1370, 495, Math.round(0.9 * fps)],
+          [1370, 495, clickFrame],
         ]}
         clickAt={clickFrame}
       />

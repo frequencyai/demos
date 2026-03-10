@@ -68,16 +68,15 @@ export const DemoVideo: React.FC<z.infer<typeof DemoVideoSchema>> = () => {
         timing={smoothFade(0.5)}
       />
 
-      {/* TEXT: generate app ideas */}
+      {/* TEXT: parallel pipelines */}
       <TransitionSeries.Sequence durationInFrames={t(2.5)}>
         <TextSlide
           parts={[
-            { text: "generate" },
-            { text: "&", accent: true },
-            { text: "validate", bold: true },
-            { text: "ideas", bold: true },
+            { text: "parallel pipelines," },
+            { text: "one", accent: true },
+            { text: "command", bold: true },
           ]}
-          sub="ideas pipeline"
+          sub="autonomous agent orchestration"
         />
       </TransitionSeries.Sequence>
 
@@ -96,15 +95,15 @@ export const DemoVideo: React.FC<z.infer<typeof DemoVideoSchema>> = () => {
         timing={smoothFade(0.5)}
       />
 
-      {/* TEXT: build apps */}
+      {/* TEXT: orchestration */}
       <TransitionSeries.Sequence durationInFrames={t(2.5)}>
         <TextSlide
           parts={[
-            { text: "build" },
-            { text: "apps", bold: true },
-            { text: "automatically", bold: true },
+            { text: "agents build." },
+            { text: "frequency", accent: true },
+            { text: "orchestrates.", bold: true },
           ]}
-          sub="build pipeline"
+          sub="cross-pipeline coordination"
         />
       </TransitionSeries.Sequence>
 
@@ -123,15 +122,14 @@ export const DemoVideo: React.FC<z.infer<typeof DemoVideoSchema>> = () => {
         timing={smoothFade(0.5)}
       />
 
-      {/* TEXT: deploy to production */}
+      {/* TEXT: quality controls */}
       <TransitionSeries.Sequence durationInFrames={t(2.5)}>
         <TextSlide
           parts={[
-            { text: "deploy" },
-            { text: "to", accent: true },
-            { text: "production", bold: true },
+            { text: "every step" },
+            { text: "verified.", bold: true },
           ]}
-          sub="deploy pipeline"
+          sub="retries \u2022 failure isolation \u2022 dependency checks"
         />
       </TransitionSeries.Sequence>
 
@@ -150,15 +148,15 @@ export const DemoVideo: React.FC<z.infer<typeof DemoVideoSchema>> = () => {
         timing={smoothFade(0.6)}
       />
 
-      {/* TEXT: live on the web (replaces RepoUpdates) */}
+      {/* TEXT: results */}
       <TransitionSeries.Sequence durationInFrames={t(2.5)}>
         <TextSlide
           parts={[
-            { text: "live" },
-            { text: "on the", accent: true },
-            { text: "web", bold: true },
+            { text: "from config" },
+            { text: "to", accent: true },
+            { text: "production.", bold: true },
           ]}
-          sub="your apps, shipped"
+          sub="30+ apps shipped autonomously"
         />
       </TransitionSeries.Sequence>
 

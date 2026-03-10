@@ -9,6 +9,7 @@ import {
 } from "remotion";
 import { colors, fonts, DEPLOY_CHECKLIST, LOGO_WAVE_PATH } from "../theme";
 import { AnimatedCursor } from "../components/Cursor";
+import { MetricsRibbon } from "../components/MetricsRibbon";
 
 /**
  * Scene 7 — Deploy checklist inside the dashboard frame.
@@ -52,8 +53,6 @@ export const DeployChecklist: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: colors.bg, overflow: "hidden" }}>
-      {/* Scan lines */}
-      <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)", pointerEvents: "none", zIndex: 40 }} />
 
       <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <div style={{ width: 1760, height: 840, display: "flex", borderRadius: 14, border: `1px solid ${colors.border}`, overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.3)" }}>
@@ -65,8 +64,23 @@ export const DeployChecklist: React.FC = () => {
                 <path d={LOGO_WAVE_PATH} stroke={colors.accent} strokeWidth="2.5" fill="none" strokeLinecap="round" />
               </svg>
               <span style={{ fontFamily: fonts.body, fontSize: 19, fontWeight: 700, letterSpacing: "0.08em", color: colors.text }}>FREQUENCY</span>
+              <div style={{ width: 7, height: 7, borderRadius: "50%", backgroundColor: colors.accent, boxShadow: `0 0 8px ${colors.accent}` }} />
             </div>
             <div style={{ marginTop: 10, fontFamily: fonts.mono, fontSize: 13, color: colors.textTertiary, padding: "7px 10px", border: `1px solid ${colors.accent}`, borderRadius: 3, backgroundColor: colors.bg }}>app-factory</div>
+          </div>
+
+          {/* Run / Pause / Stop */}
+          <div style={{ padding: "0 24px 8px", display: "flex", gap: 1 }}>
+            {[
+              { label: "Run", icon: "M2.5 1.5l7 4.5-7 4.5V1.5z", active: true, color: colors.positive },
+              { label: "Pause", icon: "M3 1.5h2v9H3zM7 1.5h2v9H7z", active: false, color: colors.textMuted },
+              { label: "Stop", icon: "M2.5 2.5h7v7h-7z", active: false, color: colors.textMuted },
+            ].map((btn) => (
+              <div key={btn.label} style={{ display: "flex", alignItems: "center", gap: 4, padding: "4px 10px", fontFamily: fonts.mono, fontSize: 9, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.1em", color: btn.active ? btn.color : colors.textMuted, border: `1px solid ${btn.active ? btn.color : colors.borderLight}`, backgroundColor: btn.active ? `${btn.color}10` : "transparent", borderRadius: 3 }}>
+                <svg width="8" height="8" viewBox="0 0 12 12" fill="none"><path d={btn.icon} fill="currentColor" /></svg>
+                {btn.label}
+              </div>
+            ))}
           </div>
 
           {["ideas", "build", "deploy", "release-shared", "release", "marketing", "bugjar"].map((name) => {
@@ -81,8 +95,8 @@ export const DeployChecklist: React.FC = () => {
                       {completedCount}/{DEPLOY_CHECKLIST.length}
                     </span>
                   )}
-                  {name === "ideas" && <span style={{ marginLeft: "auto", fontFamily: fonts.mono, fontSize: 11, color: colors.positive }}>3/3 ✓</span>}
-                  {name === "build" && <span style={{ marginLeft: "auto", fontFamily: fonts.mono, fontSize: 11, color: colors.positive }}>3/3 ✓</span>}
+                  {name === "ideas" && <span style={{ marginLeft: "auto", fontFamily: fonts.mono, fontSize: 11, color: colors.positive }}>3/3</span>}
+                  {name === "build" && <span style={{ marginLeft: "auto", fontFamily: fonts.mono, fontSize: 11, color: colors.positive }}>3/3</span>}
                 </div>
                 {isDeploy && (
                   <div style={{ height: 2, backgroundColor: colors.borderLight, borderRadius: 1, overflow: "hidden" }}>
@@ -95,14 +109,24 @@ export const DeployChecklist: React.FC = () => {
         </div>
 
         {/* Main content */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "24px 40px", gap: 16 }}>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "24px 40px", gap: 12 }}>
           <div>
             <h2 style={{ fontFamily: fonts.body, fontSize: 30, fontWeight: 800, color: colors.text, letterSpacing: "-0.03em", margin: 0 }}>deploy</h2>
             <p style={{ fontFamily: fonts.mono, fontSize: 13, color: colors.accent, marginTop: 3 }}>debtmelt · weekpulse · pennyscope</p>
           </div>
 
+          {/* Metrics ribbon */}
+          <MetricsRibbon
+            throughput="6"
+            failureRate="0%"
+            wip={String(DEPLOY_CHECKLIST.length - completedCount)}
+            leadTime={completedCount > 0 ? "3m" : "—"}
+            terminal={String(6 + completedCount)}
+            retryDlq="0 / 0"
+          />
+
           {/* Progress ring + checklist side by side */}
-          <div style={{ display: "flex", gap: 48, alignItems: "flex-start", marginTop: 8 }}>
+          <div style={{ display: "flex", gap: 48, alignItems: "flex-start", marginTop: 4 }}>
             {/* Left: progress ring */}
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, minWidth: 120 }}>
               <div style={{ position: "relative", width: 120, height: 120 }}>
@@ -124,7 +148,6 @@ export const DeployChecklist: React.FC = () => {
                 </div>
               </div>
 
-              {/* Success glow */}
               {allDone && (
                 <div style={{
                   fontFamily: fonts.mono, fontSize: 11, color: colors.positive,

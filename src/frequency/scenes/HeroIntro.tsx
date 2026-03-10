@@ -70,7 +70,7 @@ export const HeroIntro: React.FC = () => {
   );
 
   // ── Tagline typewriter ──
-  const tagline = "Autonomous workflow automation";
+  const tagline = "Autonomous agent orchestration";
   const tagStart = 2.0 * fps;
   const charFrames = 1.5;
   const typedCount = Math.min(
@@ -110,17 +110,7 @@ export const HeroIntro: React.FC = () => {
         }}
       />
 
-      {/* Scan lines */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)",
-          pointerEvents: "none",
-          zIndex: 10,
-        }}
-      />
+
 
       {/* Corner marks */}
       {[

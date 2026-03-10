@@ -67,8 +67,6 @@ export const RepoUpdates: React.FC = () => {
         overflow: "hidden",
       }}
     >
-      <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)", pointerEvents: "none", zIndex: 10 }} />
-
       <div style={{ display: "flex", flexDirection: "column", gap: 24, width: 1200 }}>
         {/* Header */}
         <div style={{ opacity: headerSpring, transform: `translateY(${interpolate(headerSpring, [0, 1], [15, 0])}px)` }}>
